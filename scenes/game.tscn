@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://b24crkm180be5"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_eicur"]
+[ext_resource type="PackedScene" uid="uid://bn0oguli6f8g1" path="res://scenes/player.tscn" id="2_yxidd"]
+[ext_resource type="Texture2D" uid="uid://c57pjblycbu4p" path="res://assets/Tiles/waffleChoco.png" id="4_dd3ip"]
+[ext_resource type="PackedScene" uid="uid://d3khwrfqe8ofi" path="res://scenes/enemy.tscn" id="4_jt5p0"]
+[ext_resource type="PackedScene" uid="uid://ctvo6yvpg4t83" path="res://scenes/hud.tscn" id="5_hotwr"]
+[ext_resource type="PackedScene" uid="uid://ds0netxapvxdl" path="res://scenes/diver_enemy.tscn" id="5_sckr1"]
+[ext_resource type="PackedScene" uid="uid://bm7etftdgrq2l" path="res://scenes/game_over_screen.tscn" id="6_5mmxw"]
+[ext_resource type="Texture2D" uid="uid://b3srndr2f00ec" path="res://assets/vecteezy_human-teeth-inside-mouth-with-whiten-teeth_6351735.jpg" id="8_c5qxf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wssps"]
+radius = 23.5053
+
+[sub_resource type="PackedScene" id="PackedScene_nvscs"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("WaffleEnemy", "Sprite2D", "texture", "CollisionShape2D", "position", "shape", "VisibleOnScreenNotifier2D"),
+"node_count": 3,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 0, 0, 0, 0, 2147483647, 262145, -1, 1, 2, 1, 0, 0, 0, 2147483647, 524291, -1, 2, 4, 2, 5, 3, 0),
+"variants": [ExtResource("4_jt5p0"), ExtResource("4_dd3ip"), Vector2(0.5, 0.5), SubResource("CircleShape2D_wssps")],
+"version": 3
+}
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_eicur")
+enemy_scenes = Array[PackedScene]([ExtResource("4_jt5p0"), ExtResource("5_sckr1"), SubResource("PackedScene_nvscs")])
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UILayer" instance=ExtResource("5_hotwr")]
+
+[node name="GameOverScreen" parent="UILayer" instance=ExtResource("6_5mmxw")]
+visible = false
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource("2_yxidd")]
+position = Vector2(493, 907)
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="."]
+position = Vector2(270, 850)
+
+[node name="LaserContainer" type="Node2D" parent="."]
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(273.5, 483.75)
+scale = Vector2(0.934596, 0.928848)
+texture = ExtResource("8_c5qxf")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

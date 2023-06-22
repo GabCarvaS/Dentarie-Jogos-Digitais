@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn0oguli6f8g1"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_jnuk7"]
+[ext_resource type="Texture2D" uid="uid://doo010kpvrax7" path="res://assets/pastaescova.png" id="2_rwpht"]
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_jnuk7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("2_rwpht")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, 21, 7, 29, 7, 37, 16, 37, 26, 28, 26, 10, 33, 15, 33, 21, 37, 21, 39, -2, 40, -17, 31, -17, 31, -2, 34, 9, 26, 2, 17, -17, 5, -18, 0, -13, -5, -18, -17, -17, -30, 8, -30, -4, -37, -4, -37, 19, -31, 19, -26, 11, -23, 25, -14, 38, -7, 38, -7, 28)
+
+[node name="Muzzle" type="Marker2D" parent="."]
+position = Vector2(-34, -9)
