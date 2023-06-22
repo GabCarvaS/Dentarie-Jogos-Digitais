@@ -6,8 +6,6 @@
 
 :small_blue_diamond: [Ambiente de Desenvolvimento](#ambiente-de-desenvolvimento)
 
-:small_blue_diamond: [Funcionamento](#funcionamento)
-
 :small_blue_diamond: [Desenvolvedores](#desenvolvedores)
 
 ## Descrição do Projeto
